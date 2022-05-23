@@ -1,0 +1,111 @@
+.sponsors__block {
+    padding: 0 rem(30);
+}
+.sponsors__heading {
+    margin-top: 0;
+    @include adaptive-value("margin-bottom", 75, 35, 0);
+    font-weight: 700;
+    font-size: rem(48);
+    line-height: rem(58);
+    color: #222227;
+}
+.swiper.sponsors__swiper {
+    position: relative;
+    width: 95%;
+    height: 100%;
+    @include adaptive-value("margin-bottom", 130, 50, 0);
+    padding-left: rem(60);
+}
+.sponsors__logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.sponsors__next,
+.sponsors__prev {
+    cursor: pointer;
+    width: rem(10);
+    height: rem(20);
+    z-index: 1000;
+    padding: rem(10) rem(15) rem(10) rem(15);
+    border-radius: 50%;
+    background: #ece7f0;
+    display: flex;
+    align-items: baseline;
+    position: absolute;
+    top: 30%;
+}
+.sponsors__next:hover,
+.sponsors__prev:hover {
+    background: #bdbac0;
+    transition: all 0.2s;
+}
+.sponsors__next {
+    right: rem(10);
+}
+.sponsors__prev {
+    transform: rotate(180deg);
+    left: rem(10);
+}
+.sponsors__imgblock {
+    max-width: rem(250);
+}
+@media (max-width: rem(1700)) {
+    .sponsors__heading {
+        font-size: rem(38);
+        line-height: rem(48);
+    }
+    .sponsors__imgblock {
+        max-width: rem(200);
+    }
+}
+@media (max-width: rem(1200)) {
+    .swiper.sponsors__swiper {
+        width: 98%;
+        padding-left: rem(50);
+        padding-right: rem(0);
+    }
+}
+
+@media (max-width: rem(1000)) {
+    .sponsors__next {
+        right: 2.625rem;
+    }
+    .sponsors__imgblock {
+        max-width: rem(180);
+    }
+    .sponsors__heading {
+        font-size: rem(32);
+        line-height: rem(42);
+    }
+}
+@media (max-width: rem(768)) {
+    .sponsors__block {
+        padding: 0 rem(20);
+    }
+    .sponsors__imgblock {
+        max-width: rem(170);
+    }
+}
+@media (max-width: rem(767)) {
+    .swiper.sponsors__swiper {
+        padding-left: rem(10);
+    }
+    .sponsors__imgblock {
+        max-width: rem(170);
+        margin-right: 0px;
+    }
+    .sponsors__heading {
+        font-size: rem(26);
+        line-height: rem(30);
+    }
+}
+@media (max-width: rem(480)) {
+    .swiper.sponsors__swiper {
+        padding-left: rem(10);
+    }
+    .sponsors__imgblock {
+        max-width: rem(190);
+        margin-right: 0px;
+    }
+}
