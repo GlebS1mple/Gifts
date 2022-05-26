@@ -1,17 +1,17 @@
 import React from 'react';
 import CatalogPage from './CatalogPage';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setNavLink } from '../../redux/navReducer';
 import { setSearchActiveAC } from '../../redux/aboutReducer';
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { setCategoryAC, getFilteredProducts, getProducts, setProductActiveAC, setLimitAC, getMoreProducts } from './../../redux/catalogReducer';
-import { setCartActiveAC, setCartProductsAC } from './../../redux/cartReducer';
+import { addProductAC, setCartActiveAC, setCartProductsAC } from './../../redux/cartReducer';
 
 const CatalogPageContainer = () => {
-    let state = useSelector(state => state)
-    let dispatch = useDispatch();
+    const state = useSelector(state => state)
+    const dispatch = useDispatch();
     const activateSearch = (isActive) => {
         dispatch(setSearchActiveAC(isActive))
     }
@@ -61,7 +61,7 @@ const CatalogPageContainer = () => {
         let cartStorageProducts = JSON.parse(raw);
         dispatch(setCartProductsAC(cartStorageProducts.cartProducts))
     }, [])*/
-    let setActive = (isActiveCart, isActiveProduct, product) => {
+    const setActive = (isActiveCart, isActiveProduct, product) => {
         let repeatedProduct = state.cart.cartProducts.find(cartProduct => cartProduct.id === product.id);
         if (!repeatedProduct) {
             dispatch(setCartProductsAC(product));
@@ -72,6 +72,19 @@ const CatalogPageContainer = () => {
             dispatch(setProductActiveAC(isActiveProduct));
         }
     }
+    /*const setCartProductActive = (isActiveCart, isActiveProduct, product, e) => {
+        e.stopPropagation();
+        let repeatedProduct = state.cart.cartProducts.find(cartProduct => cartProduct.id === product.id);
+        if (!repeatedProduct) {
+            // dispatch(addProductAC(product.id, product.count, product.price, product.totalProductCount));
+            dispatch(setCartProductsAC(product));
+            dispatch(setCartActiveAC(isActiveCart));
+            dispatch(setProductActiveAC(isActiveProduct));
+        } else {
+            dispatch(setCartActiveAC(isActiveCart));
+            dispatch(setProductActiveAC(isActiveProduct));
+        }
+    }*/
     return (
         <CatalogPage
             activateSearch={activateSearch}
@@ -89,6 +102,7 @@ const CatalogPageContainer = () => {
             newLoader={newLoader}
             setProductUnactive={setProductUnactive}
             setActive={setActive}
+            //setCartProductActive={setCartProductActive}
             isActive={state.catalog.product.isActive}
             images={state.catalog.product.images}
             name={state.catalog.product.name}

@@ -6,4 +6,4 @@ const CatalogLink = ({ text, onClick, name }) => {
     );
 };
 
-export default CatalogLink;
+export default React.memo(CatalogLink);

@@ -41,4 +41,4 @@ Main.propTypes = {
     totalCount: PropTypes.number.isRequired,
 };
 
-export default Main;
+export default React.memo(Main);

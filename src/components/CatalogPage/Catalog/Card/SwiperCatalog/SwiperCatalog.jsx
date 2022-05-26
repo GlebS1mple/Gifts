@@ -38,4 +38,4 @@ SwiperCatalog.propTypes = {
     images: PropTypes.array.isRequired,
 };
 
-export default SwiperCatalog;
+export default React.memo(SwiperCatalog);

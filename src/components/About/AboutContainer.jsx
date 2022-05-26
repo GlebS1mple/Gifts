@@ -6,34 +6,36 @@ import { setSearchedProductsAC, getTotalProducts, setSearchActiveAC, setMobileSe
 import { setProductActiveAC } from './../../redux/catalogReducer';
 
 const AboutContainer = () => {
-    const state = useSelector(state => state);
+    let state = useSelector(state => state);
     const dispatch = useDispatch();
     const [burger, setBurger] = useState(false);
     const activateSearch = useCallback((isActive) => {
         dispatch(setSearchActiveAC(isActive))
-    }, []);
+        //console.log("render");
+    }, [state.about.isActive]);
     /*const setSomeBurger = useCallback(() => {
         setBurger(true)
         console.log("render");
     }, [burger]);*/
     const setProductActive = useCallback((isActive, id, name, price, brand, description, image, count, totalProductPrice, images) => {
         dispatch(setProductActiveAC(isActive, id, name, price, brand, description, image, count, totalProductPrice, images));
-        dispatch(setSearchActiveAC(false), [])
-    });
-    const setSomeBurger = useCallback(() => {
+        dispatch(setSearchActiveAC(false))
+    }, [state.catalog.product.isActive]);
+    const setSomeBurger = () => {
         setBurger(true);
-    }, [burger])
+        document.body.classList.add("lock");
+    }
     useEffect(() => {
         dispatch(getTotalProducts(100, 0));
     }, [])
-    let setCurrentValue = useCallback((value) => {
+    let setCurrentValue = (value) => {
         if (state.about.totalProducts.length > 0 && value) {
             let searchedProducts = state.about.totalProducts.filter((product) => {
                 return product.title.toLowerCase().includes(value.toLowerCase());
             }, []);
             dispatch(setSearchedProductsAC(searchedProducts));
         }
-    }, []);
+    };
     /*const memorized = useMemo((value) => {
         setCurrentValue(value);
     }, [value])*/
@@ -50,8 +52,8 @@ const AboutContainer = () => {
     const setMobileSearchActive = useCallback(() => {
         dispatch(setMobileSearchActiveAC());
         dispatch(setSearchActiveAC(false));
-    }, [])
-    setCurrentValue = useCallback(debounce(setCurrentValue, 200), [])
+    }, [state.about.isMobileSearchActive])
+    setCurrentValue = debounce(setCurrentValue, 200);
     //memorized = debounce(memorized, 200)
     return (
         <About

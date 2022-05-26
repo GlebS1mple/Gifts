@@ -17,4 +17,4 @@ SwiperProductSlide.propTypes = {
     image: PropTypes.string.isRequired,
 };
 
-export default SwiperProductSlide;
+export default React.memo(SwiperProductSlide);

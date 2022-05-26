@@ -180,6 +180,10 @@ body {
     position: absolute;
     bottom: rem(24);
     right: rem(19);
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
 }
 .card__imgcart {
 }

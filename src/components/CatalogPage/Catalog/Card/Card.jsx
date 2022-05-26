@@ -5,7 +5,7 @@ import cartPng from '../../../../img/cart.png';
 import { PropTypes } from 'prop-types';
 
 
-const Card = ({ name, price, brand, images, onClick }) => {
+const Card = ({ name, price, brand, images, onClick, setCartProductActive, id, image, count, totalProductCount }) => {
     return (
         <div className="main__cardblock">
             <div className="main__card card" onClick={onClick}>
@@ -20,13 +20,23 @@ const Card = ({ name, price, brand, images, onClick }) => {
                         <div className="card__price">${price}</div>
                     </div>
                 </div>
-                <div className="card__cart">
+                <button className="card__cart" >
                     <picture><source srcSet={cartWebp} type="image/webp" /><img src={cartPng} alt="Добавить в корзину" className="card__imgcart" /></picture>
-                </div>
+                </button>
             </div>
         </div >
     )
 };
+/*onClick={(e) => setCartProductActive(false, false,
+                    {
+                        id: id,
+                        title: name,
+                        image: image,
+                        price: price,
+                        count: 1,
+                        totalProductPrice: price,
+                        totalProductCount: totalProductCount,
+                    }, e)} */
 Card.propTypes = {
     images: PropTypes.array.isRequired,
     name: PropTypes.string.isRequired,
@@ -35,4 +45,4 @@ Card.propTypes = {
     image: PropTypes.string.isRequired,
 };
 
-export default Card;
+export default React.memo(Card);

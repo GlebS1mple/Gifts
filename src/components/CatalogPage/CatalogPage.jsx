@@ -8,7 +8,7 @@ import { PropTypes } from 'prop-types';
 
 const CatalogPage = React.memo(({ ...props }) => {
     let { activateSearch, filters, setFilters, links, currentCategory, isFetching, filtered, setProductActive, products, limit, addMoreProducts, filterBy, newLoader,
-        setProductUnactive, setActive, isActive, images, name, brand, price, description, id, image, count, totalProductPrice, totalProductCount } = props;
+        setProductUnactive, setCartProductActive, setActive, isActive, images, name, brand, price, description, id, image, count, totalProductPrice, totalProductCount } = props;
     return (
         <div onClick={() => { activateSearch(false) }}>
             <Opening />
@@ -26,6 +26,11 @@ const CatalogPage = React.memo(({ ...props }) => {
                 addMoreProducts={addMoreProducts}
                 filterBy={filterBy}
                 newLoader={newLoader}
+                setActive={setActive}
+                count={count}
+                totalProductPrice={totalProductPrice}
+                totalProductCount={totalProductCount}
+                setCartProductActive={setCartProductActive}
             />
             <CartContainer />
             <Product
@@ -56,7 +61,7 @@ CatalogPage.defaultProps = {
     description: "",
     id: 0,
     image: "",
-    count: 0,
+    count: 1,
     totalProductPrice: 0,
     totalProductCount: 0,
 };
@@ -92,4 +97,4 @@ CatalogPage.propTypes = {
 
 
 
-export default CatalogPage;
+export default React.memo(CatalogPage);

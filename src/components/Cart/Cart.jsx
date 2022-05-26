@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import "../Cart/cart.scss";
 import removeWebp from '../../img/remove.webp';
 import removePng from '../../img/remove.png';
@@ -9,8 +9,22 @@ import { PropTypes } from 'prop-types';
 
 
 
-const Cart = React.memo(({ ...props }) => {
+const Cart = ({ ...props }) => {
     let { addProduct, deleteProduct, removeProduct, setCartActive, total, isActive, cartProducts, setUnactiveCart } = props;
+    const memoCartProducts = useMemo(() => cartProducts.map((product, index) =>
+        <CartProduct
+            key={index}
+            id={product.id}
+            title={product.title}
+            image={product.image}
+            price={product.price}
+            totalProductPrice={product.totalProductPrice}
+            totalProductCount={product.totalProductCount}
+            count={product.count}
+            addProduct={addProduct}
+            deleteProduct={deleteProduct}
+            removeProduct={removeProduct}
+        />), [cartProducts])
     return (
         <div className={isActive ? "popup popup__active" : "popup"} onClick={() => { setCartActive(false) }}>
             <div className="container popup__container">
@@ -33,29 +47,7 @@ const Cart = React.memo(({ ...props }) => {
                                         <div className="popup__order popup__order_type_mobile">Заказ № 110293</div>
                                     </div>
                                     <ul className="popup__cardsblock">
-                                        {/*cartStorageProducts.length > 0 ? cartStorageProducts.map((product, index) =>
-                                            <CartProduct
-                                                key={index}
-                                                id={product.id}
-                                                title={product.title}
-                                                image={product.image}
-                                                price={product.price}
-                                                totalProductPrice={product.totalProductPrice}
-                                                totalProductCount={product.totalProductCount}
-                                                count={product.count} />) :*/ cartProducts.map((product, index) =>
-                                            <CartProduct
-                                                key={index}
-                                                id={product.id}
-                                                title={product.title}
-                                                image={product.image}
-                                                price={product.price}
-                                                totalProductPrice={product.totalProductPrice}
-                                                totalProductCount={product.totalProductCount}
-                                                count={product.count}
-                                                addProduct={addProduct}
-                                                deleteProduct={deleteProduct}
-                                                removeProduct={removeProduct}
-                                            />)}
+                                        {memoCartProducts}
                                     </ul>
                                     <div className="popup__addinfo">
                                         <div className="popup__order popup__order_type_desktop">Заказ № 110293</div>
@@ -73,8 +65,7 @@ const Cart = React.memo(({ ...props }) => {
             </div>
         </div>
     );
-});
-//state.cart.cartProducts.length > 0 &&
+};
 
 
 Cart.propTypes = {
@@ -88,4 +79,4 @@ Cart.propTypes = {
     setUnactiveCart: PropTypes.func.isRequired
 }
 
-export default Cart;
+export default React.memo(Cart);

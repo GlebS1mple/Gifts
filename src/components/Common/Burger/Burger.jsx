@@ -74,4 +74,4 @@ Burger.defaultProps = {
     burger: false
 }
 
-export default Burger;
+export default React.memo(Burger);

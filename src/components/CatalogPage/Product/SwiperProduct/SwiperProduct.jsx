@@ -40,4 +40,4 @@ const SwiperProduct = ({ images }) => {
 SwiperProduct.propTypes = {
     images: PropTypes.array.isRequired,
 };
-export default SwiperProduct;
+export default React.memo(SwiperProduct);

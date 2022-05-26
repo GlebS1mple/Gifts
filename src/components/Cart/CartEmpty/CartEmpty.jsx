@@ -19,4 +19,4 @@ CartEmpty.propTypes = {
     setUnactiveCart: PropTypes.func.isRequired
 }
 
-export default CartEmpty;
+export default React.memo(CartEmpty);

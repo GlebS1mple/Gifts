@@ -46,4 +46,4 @@ CartProduct.defaultProps = {
     image: "Картинка не загрузилась(",
 }
 
-export default CartProduct;
+export default React.memo(CartProduct);

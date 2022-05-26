@@ -14,4 +14,4 @@ ProductImgBlock.defautProps = {
     image: "Картинка не загрузилась("
 };
 
-export default ProductImgBlock;
+export default React.memo(ProductImgBlock);

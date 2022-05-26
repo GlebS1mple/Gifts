@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import "../Catalog/catalog.scss";
 import filterImg from "../../../img/filter.png";
 import arrowRight2Webp from '../../../img/arrow-right2.webp';
@@ -11,7 +11,65 @@ import { PropTypes } from 'prop-types';
 
 
 const Catalog = ({ ...props }) => {
-    let { filters, setFilters, links, currentCategory, isFetching, filtered, setProductActive, products, limit, addMoreProducts, filterBy, newLoader } = props;
+    let { count, setCartProductActive, totalProductPrice, totalProductCount, setActive, filters, setFilters, links, currentCategory, isFetching, filtered, setProductActive, products, limit, addMoreProducts, filterBy, newLoader } = props;
+    const memoFiltered = useMemo(() =>
+        filtered.map((product) =>
+            <Card key={product.id}
+                id={product.id}
+                count={count}
+                totalProductPrice={totalProductPrice}
+                totalProductCount={totalProductCount}
+                name={product.title}
+                price={product.price}
+                brand={product.brand}
+                image={product.thumbnail}
+                images={product.images}
+                description={product.description}
+                setActive={setActive}
+                setCartProductActive={setCartProductActive}
+                onClick={() => setProductActive(true,
+                    product.id,
+                    product.title,
+                    product.price,
+                    product.brand,
+                    product.description,
+                    product.thumbnail,
+                    1,
+                    product.price,
+                    product.images)}
+            />), [filtered])
+    const memoProducts = useMemo(() =>
+        products.map((product) =>
+            <Card key={product.id}
+                id={product.id}
+                count={count}
+                totalProductPrice={totalProductPrice}
+                totalProductCount={totalProductCount}
+                name={product.title}
+                price={product.price}
+                brand={product.brand}
+                image={product.thumbnail}
+                images={product.images}
+                description={product.description}
+                setActive={setActive}
+                setCartProductActive={setCartProductActive}
+                onClick={() => setProductActive(true,
+                    product.id,
+                    product.title,
+                    product.price,
+                    product.brand,
+                    product.description,
+                    product.thumbnail,
+                    1,
+                    product.price,
+                    product.images)}
+            />), [products])
+    /*const memoFiltered = useMemo(() => {
+        return card(filtered)
+    }, [filtered])
+    const memoProducts = useMemo(() => {
+        return card(products)
+    }, [products])*/
     return (
         <main className="main">
             <div className="container container__main">
@@ -21,56 +79,19 @@ const Catalog = ({ ...props }) => {
                         <h6 className={filters ? "mobfilter__title mobfilter__title_type_active" : "mobfilter__title"}>Фильтр</h6>
                     </button>
                     <ul className={filters ? "main__filter main__filter_type_active" : "main__filter"}>
-                        {links.map((link) =>
+                        {useMemo(() => links.map((link) =>
                             <CatalogLink
                                 key={link.id}
                                 text={link.text}
                                 name={link.category == currentCategory ? "main__link_type_active " : "main__link"}
                                 onClick={() => filterBy(link.category)}
                                 category={link.category}
-                            />)}
+                            />), [currentCategory])}
                     </ul>
                     <div className={filters ? "main__galerey main__galerey_type_mobactive" : "main__galerey"}>
                         {isFetching ?
                             newLoader.map((ar, index) => <MyLoader key={index} />) :
-                            currentCategory !== "all" && filtered.length > 0 ? filtered.map((product) =>
-                                <Card key={product.id}
-                                    name={product.title}
-                                    price={product.price}
-                                    brand={product.brand}
-                                    image={product.thumbnail}
-                                    images={product.images}
-                                    description={product.description}
-                                    onClick={() => setProductActive(true,
-                                        product.id,
-                                        product.title,
-                                        product.price,
-                                        product.brand,
-                                        product.description,
-                                        product.thumbnail,
-                                        1,
-                                        product.price,
-                                        product.images)}
-                                />) : products.map((product) =>
-                                    <Card key={product.id}
-                                        name={product.title}
-                                        price={product.price}
-                                        brand={product.brand}
-                                        image={product.thumbnail}
-                                        images={product.images}
-                                        description={product.description}
-                                        onClick={() => setProductActive(true,
-                                            product.id,
-                                            product.title,
-                                            product.price,
-                                            product.brand,
-                                            product.description,
-                                            product.thumbnail,
-                                            1,
-                                            product.price,
-                                            product.images)}
-                                    />
-                                )}
+                            currentCategory !== "all" && filtered.length > 0 ? memoFiltered : memoProducts}
                     </div>
                     <div className="main__paginationblock">
                         <button className={
@@ -101,4 +122,4 @@ Catalog.propTypes = {
     filterBy: PropTypes.func.isRequired,
     newLoader: PropTypes.array.isRequired,
 };
-export default Catalog;
+export default React.memo(Catalog);

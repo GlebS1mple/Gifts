@@ -30,4 +30,4 @@ AboutProductLink.defaultProps = {
     img: "Картинка не загрузилась(",
 }
 
-export default AboutProductLink;
+export default React.memo(AboutProductLink);

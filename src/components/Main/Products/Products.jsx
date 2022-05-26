@@ -90,4 +90,4 @@ Products.propTypes = {
     totalCount: PropTypes.number.isRequired,
 };
 
-export default Products;
+export default React.memo(Products);

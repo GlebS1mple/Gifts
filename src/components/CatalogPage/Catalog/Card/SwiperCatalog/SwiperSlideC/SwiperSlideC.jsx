@@ -9,4 +9,4 @@ SwiperSlideC.propTypes = {
     mainImg: PropTypes.string.isRequired,
 };
 
-export default SwiperSlideC;
+export default React.memo(SwiperSlideC);

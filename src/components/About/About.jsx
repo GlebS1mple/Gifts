@@ -15,7 +15,7 @@ import { PropTypes } from 'prop-types';
 
 
 
-const About = React.memo(({ ...props }) => {
+const About = ({ ...props }) => {
     let { searchedProducts, setProductActive, activateSearch, setCurrentValue, isActive, setMobileSearchActive, setSomeBurger, setBurger, burger, isMobileSearchActive } = props;
     return (
         <header className="about" onClick={() => { activateSearch(false) }}>
@@ -45,7 +45,7 @@ const About = React.memo(({ ...props }) => {
             </div>
         </header>
     );
-});
+};
 
 About.propTypes = {
     searchedProducts: PropTypes.array.isRequired,
@@ -60,4 +60,4 @@ About.propTypes = {
     isMobileSearchActive: PropTypes.bool.isRequired,
 }
 
-export default About;
+export default React.memo(About);

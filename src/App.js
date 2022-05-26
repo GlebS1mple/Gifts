@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Form from "./components/Form/Form";
-import Main from "./components/Main/Main";
 import store from "./redux/store";
 import { Provider } from 'react-redux';
 import FooterContainer from './components/Footer/FooterContainer';
@@ -23,7 +22,7 @@ import MainContainer from './components/Main/MainContainer';
 function App() {
   return (
     <div >
-      <BrowserRouter>
+      <HashRouter>
         <Provider store={store}>
           <AboutContainer />
           <NavContainer />
@@ -36,7 +35,7 @@ function App() {
           <Form />
           <FooterContainer />
         </Provider>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
