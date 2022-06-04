@@ -38,8 +38,8 @@ const Cart = ({ ...props }) => {
                                     <div className="popup__text">Введите свои контактные данные, и наш менеджер свяжется с Вами в
                                         течении 1 часа</div>
                                     <MainForm formName={"popup__form"} inputName={"popup__input"} btnName={"btn btn_type_light btn__popupcart"} coopName={"popup__formcoop popup__formcoop_type_inputs"} />
-                                    <p className="popup__confirm">Натискаючи "Підтвердити замовлення", Ви даєте згоду на обробку Ваших
-                                        персональних даних</p>
+                                    <p className="popup__confirm">Нажимая "Подтвердить заказ", Вы даете согласие на обработку Ваших
+                                        персональных данных</p>
                                 </div>
                                 <div className="popup__products">
                                     <div className="popup__productsmobule">

@@ -50,7 +50,6 @@ const CartContainer = () => {
             dispatch(setTotalProductsCountAC(0));
         }
     }
-
     return (
         <Cart
             total={total}

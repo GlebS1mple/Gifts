@@ -121,27 +121,18 @@ $maxWidthContainer: 1600;
     padding: 0px 0px 30% 0px;
 }
 .products__modal {
-    display: none;
-}
-.modal-enter {
+    position: absolute;
+    visibility: hidden;
     opacity: 0;
-    transform: scale(0.9);
-}
-.modal-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-}
-.modal-exit {
-    opacity: 1;
-}
-.modal-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
+    transition: all 0.3s;
+    left: -25%;
+    transform: translate(-25%, 0);
 }
 .products__modal_type_active {
     display: block;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s;
     padding: rem(27) rem(18) rem(27) rem(25);
     box-sizing: border-box;
     display: flex;
