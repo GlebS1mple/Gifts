@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import Form from "./components/Form/Form";
 import store from "./redux/store";
@@ -20,6 +20,13 @@ import MainContainer from './components/Main/MainContainer';
 
 
 function App() {
+  let catchAllUnhandledErrors = () => {
+    alert("Something go wrong...")
+  }
+  useEffect(() => {
+    window.addEventListener("unhandledrejection", catchAllUnhandledErrors)
+    return () => window.removeEventListener("unhandledrejection", catchAllUnhandledErrors);
+  }, [])
   return (
     <div >
       <HashRouter>

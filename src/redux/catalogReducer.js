@@ -187,23 +187,34 @@ export const setProductActiveAC = (isActive, id, name, price, brand, description
 
 export const getProducts = (limit, skip) => async (dispatch) => {
     dispatch(setFetchingAC(true));
-    let data = await productsAPI.getProducts(limit, skip);
-    dispatch(setTotalCountAC(data.total));
-    dispatch(getProductsAC(data.products));
-    dispatch(setFetchingAC(false));
+    try {
+        let data = await productsAPI.getProducts(limit, skip);
+        dispatch(setTotalCountAC(data.total));
+        dispatch(getProductsAC(data.products));
+    }
+    catch (error) { alert(error.message) }
+    finally {
+        dispatch(setFetchingAC(false));
+    }
 }
 export const getFilteredProducts = (limit, skip, category, commonLimit) => async (dispatch) => {
     dispatch(setFetchingAC(true));
-    let data = await productsAPI.getFilteredProducts(limit, skip);
-    let filtered = data.products.filter((product) => product.category == category);
-    let newTotalCount = 0;
-    if (filtered.length >= commonLimit) {
-        newTotalCount = filtered.length;
+    try {
+        let data = await productsAPI.getFilteredProducts(limit, skip);
+        let filtered = data.products.filter((product) => product.category == category);
+        let newTotalCount = 0;
+        if (filtered.length >= commonLimit) {
+            newTotalCount = filtered.length;
+        }
+        if (category !== "all") {
+            dispatch(setTotalCountAC(newTotalCount));
+        }
+        dispatch(getfilteredProductsAC(filtered));
     }
-    if (category !== "all") {
-        dispatch(setTotalCountAC(newTotalCount));
+    catch (error) { alert(error.message) }
+    finally {
+        dispatch(setFetchingAC(false));
     }
-    dispatch(getfilteredProductsAC(filtered));
-    dispatch(setFetchingAC(false));
+
 }
 export default catalogReducer;

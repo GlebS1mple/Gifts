@@ -1,4 +1,4 @@
-export const loadState = () => {
+/*export const loadState = () => {
     try {
         const serializedState = localStorage.getItem("state");
         if (serializedState === null) {
@@ -18,4 +18,4 @@ export const saveState = (state) => {
     catch (err) {
         //ignore
     }
-};
+};*/

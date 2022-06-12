@@ -65,7 +65,10 @@ export const setMobileSearchActiveAC = () => {
 }
 
 export const getTotalProducts = (limit, skip) => async (dispatch) => {
-    let data = await productsAPI.getProducts(limit, skip);
-    dispatch(setTotalProductsAC(data.products));
+    try {
+        let data = await productsAPI.getProducts(limit, skip);
+        dispatch(setTotalProductsAC(data.products));
+    }
+    catch (error) { alert(error.message) }
 }
 export default aboutReducer;
